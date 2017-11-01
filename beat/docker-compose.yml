@@ -1,0 +1,23 @@
+# Filebeat in docker
+version: '2'
+services:
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:5.6.3
+    container_name: filebeat
+    user: root # Need to override user so we can access the log files, and docker.sock
+    restart: always
+    # Turn docker logging off, so this container won't try to log its own logs
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+    # Override the "-e" which would have logged to stdout
+    entrypoint:
+      - filebeat
+      - -c
+      - filebeat.yml
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/mnt/data/docker/containers:/var/lib/docker/containers:ro"
+      - "./logs:/usr/share/filebeat/logs"
+      - "./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro"

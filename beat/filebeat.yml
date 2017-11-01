@@ -1,0 +1,19 @@
+logging.level: debug
+logging.to_files: true
+logging.files:
+  path: /usr/share/filebeat/logs
+  name: debug.log
+logging.selectors: ["*"]
+
+filebeat.prospectors:
+- type: log
+  paths:
+   - '/opt/volumes/*/*.log'
+  json.message_key: log
+  json.overwrite_keys: true
+  json.keys_under_root: true
+  json.add_error_key: true
+output:
+  logstash:
+    hosts:
+      - "localhost:5044"
