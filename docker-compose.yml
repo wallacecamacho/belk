@@ -1,4 +1,7 @@
 #
 version: '2'
 services:
-
+  beat:
+    build: beat/
+  elk:
+    build: elk/    
