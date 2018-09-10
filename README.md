@@ -1,2 +1,9 @@
 # BELK
-Beats + ElasticSearch + Logstash + Kibanna
+
+Projeto Docker utilizando:
+
+Beats + ElasticSearch + Logstash + Kibanna. 
+
+Arquivos separados com Dockerfile + docker-compose
+
+
